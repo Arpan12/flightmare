@@ -1,0 +1,73 @@
+{
+    "name": "flightmare-dev",
+    "build": {
+        "dockerfile": "Dockerfile",
+        "context": ".."
+    },
+
+    "workspaceFolder": "/home/ubuntu/flightmare",
+
+
+    "privileged": true,
+
+    "mounts": [
+        "source=${localEnv:HOME}/Projects/flightmare,destination=/home/ubuntu/flightmare,type=bind",
+        // X11 + GPU support mounts
+        "source=/tmp/.X11-unix,destination=/tmp/.X11-unix,type=bind",
+        "source=${localEnv:HOME}/.Xauthority,destination=/home/ubuntu/.Xauthority,type=bind",
+        "source=/dev,destination=/dev,type=bind",
+        "source=/etc/localtime,destination=/etc/localtime,type=bind,readonly"
+    ],
+
+    "forwardPorts": [3000],
+
+    "securityOpt": [
+        "seccomp=unconfined"
+    ],
+
+    "capAdd": [
+        "SYS_PTRACE"
+    ],
+
+    "containerEnv": {
+        "FLIGHTMARE_PATH": "/home/ubuntu/flightmare",
+        "DISPLAY": "${localEnv:DISPLAY}",
+        "QT_X11_NO_MITSHM": "1",
+        "NVIDIA_VISIBLE_DEVICES": "all",
+        "NVIDIA_DRIVER_CAPABILITIES": "all",
+        "TERM": "xterm-256color",
+        "XDG_RUNTIME_DIR": "/tmp/runtime-ubuntu"
+    },
+
+    "remoteEnv": {
+        "TERM": "xterm-256color"
+    },
+
+    "customizations": {
+        "vscode": {
+            "extensions": [
+                "ms-python.python",
+                "mhutchie.git-graph",
+                "eamodio.gitlens",
+                "ms-azuretools.vscode-docker",
+                "ms-vscode.cpptools"
+            ],
+            "settings": {
+                "workbench.colorCustomizations": {
+                    "statusBar.background": "#018a45"
+                }
+            }
+        }
+    },
+
+    "runArgs": [
+        "--network=host",
+        "--rm",
+        "--gpus=all",
+        "--runtime=nvidia",
+        "--shm-size=8g",
+        "--env=DISPLAY=${localEnv:DISPLAY}",
+        "--env=QT_X11_NO_MITSHM=1",
+        "--env=XDG_RUNTIME_DIR=/tmp/runtime-ubuntu"
+    ]
+}
