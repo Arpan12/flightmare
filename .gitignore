@@ -19,3 +19,32 @@ _build/
 _posts
 _site
 
+
+# Build / artifacts
+flightlib/build/
+flightrl/build/
+**/__pycache__/
+*.egg-info/
+*.log
+*.tmp
+
+# Unity ignored
+unity/Build/
+unity/Library/
+unity/Temp/
+unity/Logs/
+unity/obj/
+
+# CMake files
+CMakeCache.txt
+CMakeFiles/
+cmake-install.cmake
+Makefile
+
+# Python caches
+*.pyc
+*.pyo
+*.pyd
+
+# VS Code
+.vscode/
