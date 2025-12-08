@@ -111,3 +111,7 @@ def main():
 
 if __name__ == "__main__":
     main()
+
+
+#TO RUN:
+# python3 run_drone_control.py --train 1 --render 0
