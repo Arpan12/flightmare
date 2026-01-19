@@ -206,9 +206,28 @@ FROM base AS dev_containers_target_stage2
 #docker run --network=host -it flightmare:latest /bin/bash
 # xhost +local:root
 
-#docker run -it   --gpus all   --privileged   --network=host   -e DISPLAY=$DISPLAY   -v /tmp/.X11-unix:/tmp/.X11-unix   -v $HOME/.Xauthority:/root/.Xauthority   -v $HOME/Projects/flightmare:/home/ubuntu/flightmare -e NVIDIA_DRIVER_CAPABILITIES=all   -e NVIDIA_VISIBLE_DEVICES=all   --name flightmare_gpu2   flightmare:latest   bash
+#docker run -it   --gpus all   --privileged   --network=host   -e DISPLAY=$DISPLAY   -v /tmp/.X11-unix:/tmp/.X11-unix   -v $HOME/.Xauthority:/root/.Xauthority    -e NVIDIA_DRIVER_CAPABILITIES=all   -e NVIDIA_VISIBLE_DEVICES=all   --name flightmare_gpu2   flightmare:latest   bash
 
 # Commands to run inside the container
 #sudo chown -R ubuntu:ubuntu /home/ubuntu/flightmare
 
 # to connect VS code with the container, open VS code. Pres F1. attach to running container and select the running flightmare container name you get from docker ps command
+
+#is you get yamp cpp error
+# cd ~
+# git clone https://github.com/jbeder/yaml-cpp.git
+# cd yaml-cpp
+# git checkout yaml-cpp-0.8.0
+
+# mkdir build && cd build
+# cmake .. -DYAML_BUILD_SHARED_LIBS=ON
+# make -j$(nproc)
+# sudo make install
+# sudo ldconfig
+
+# export __NV_PRIME_RENDER_OFFLOAD=1
+# export __GLX_VENDOR_LIBRARY_NAME=nvidia
+# export __VK_LAYER_NV_optimus=NVIDIA_only
+
+# roslaunch flightros camera.launch
+#in another terminal go to ~/Project/flightmare/flightrender$ ./RPG_Flightmare.x86_64 
